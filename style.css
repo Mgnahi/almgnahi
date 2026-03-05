@@ -1,0 +1,503 @@
+/* =========================================================
+   0) GLOBAL BASE (applies to ALL pages)
+   - Fixes the "white background when scrolling above"
+   - Makes sizing more predictable and mobile-friendly
+========================================================= */
+
+/* Include padding/borders in width calculations */
+* { box-sizing: border-box; }
+
+/* Fix white overscroll + apply background everywhere */
+html, body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  background: radial-gradient(1200px 700px at 50% 0%, #141826 0%, #0b0f17 55%, #070a10 100%);
+  background-color: #070a10; /* fallback (also prevents white flashes) */
+}
+
+/* Prevent tiny horizontal scroll issues */
+body {
+  font-family: system-ui, Arial, sans-serif;
+  overflow-x: hidden;
+
+  /* Prevent margin-collapsing from first element (can reveal white) */
+  padding-top: 1px;
+}
+
+/* A reusable centered container width */
+.container {
+  width: min(950px, 92%);
+  margin: 0 auto;
+}
+
+
+/* =========================================================
+   1) BACK BUTTON (button4) - used on About/Contact/Experience
+   - Fixed position top-left (mobile friendly)
+   - Purple highlight on hover
+========================================================= */
+
+#button4{
+  position: fixed;
+  top: 18px;
+  left: 18px;
+
+  width: 75px;
+  height: 45px;
+
+  font-size: 25px;
+  color: rgba(155, 130, 255, 0.60);
+  background: rgba(10, 14, 22, 0.12);
+  border: 1px solid rgba(155, 130, 255, 0.25);
+  border-radius: 8px;
+
+  cursor: pointer;
+
+  transition:
+    transform .15s ease,
+    background .15s ease,
+    border-color .15s ease,
+    color .15s ease,
+    box-shadow .15s ease;
+}
+
+#button4:hover{
+  color: rgba(230, 220, 255, 0.98);
+  background: rgba(45, 35, 85, 0.35);
+  border-color: rgba(155, 130, 255, 0.95);
+
+  box-shadow:
+    0 14px 32px rgba(0,0,0,0.35),
+    inset 0 1px 0 rgba(255,255,255,0.10);
+
+  transform: scale(1.04);
+}
+
+
+/* =========================================================
+   2) MAIN PAGE (main.html)
+   - Hero centered layout
+   - Buttons responsive + hover scale + shadow
+========================================================= */
+
+.hero{
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+
+  padding-top: 90px;
+  text-align: center;
+  gap: 18px;
+}
+
+#h1{
+  margin: 0;
+  font-size: clamp(38px, 6vw, 72px);
+  font-weight: 800;
+  color: white;
+  letter-spacing: 0.4px;
+  text-shadow: 0 10px 30px rgba(0,0,0,0.55);
+}
+
+#p1{
+  margin: 0;
+  font-size: clamp(16px, 2.2vw, 20px);
+  color: rgb(187, 214, 239);
+  line-height: 1.6;
+  max-width: 900px;
+  padding: 0 12px; /* breathing room on small screens */
+}
+
+.btn-row{
+  margin-top: 28px;
+  display: flex;
+  gap: 28px;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap; /* wraps on mobile */
+}
+
+.main-btn{
+  height: 70px;
+  width: 190px;
+  border-radius: 6px;
+  font-size: 22px;
+
+  border: none;
+  box-shadow: 0 10px 24px rgba(0,0,0,0.35);
+
+  cursor: pointer;
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+
+#button1{ background-color: rgb(86, 160, 234); }
+#button2{ background-color: rgb(183, 102, 130); }
+#button3{ background-color: rgb(86, 160, 234); }
+
+.main-btn:hover{
+  transform: scale(1.04);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.45);
+}
+
+
+/* =========================================================
+   3) ABOUT PAGE (about.html)
+   - Removes hard-coded margin-left/width (mobile friendly)
+   - Centers image and content
+========================================================= */
+
+#img1{
+  display: block;
+  width: clamp(110px, 14vw, 170px);
+  height: auto; /* fix: your old "10%px" was invalid */
+  border-radius: 999px;
+
+  margin: 80px auto 0;
+}
+
+#h2{
+  margin: 18px 0 0;
+  font-size: clamp(34px, 6vw, 60px);
+  text-align: center;
+  color: white;
+}
+
+#h3{
+  margin: 8px 0 0;
+  font-size: clamp(16px, 2.6vw, 25px);
+  text-align: center;
+  color: rgb(187, 214, 239);
+  padding: 0 12px;
+}
+
+/* Wrappers for About content */
+.myBox,
+.myBox2{
+  width: min(950px, 92%);
+  margin: 30px auto 0;
+}
+
+#h4{
+  font-size: 30px;
+  color: whitesmoke;
+  text-align: left;
+  margin: 0 0 10px;
+}
+
+#p2{
+  margin: 0;
+  text-align: left;
+  color: rgb(187, 214, 239);
+  font-size: clamp(16px, 2.3vw, 22px);
+  line-height: 1.7;
+}
+
+
+/* =========================================================
+   4) SKILLS CARD (inside About page)
+   - Glass card + pill layout
+========================================================= */
+
+.skills-card{
+  padding: 34px 28px 28px;
+  border-radius: 18px;
+
+  background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+  border: 1px solid rgba(255,255,255,0.10);
+
+  box-shadow:
+    0 20px 60px rgba(0,0,0,0.55),
+    inset 0 1px 0 rgba(255,255,255,0.10);
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.skills-title{
+  margin: 0 0 22px;
+  text-align: center;
+  font-size: clamp(28px, 4vw, 40px);
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  color: white;
+}
+
+.skills-pills{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px 16px;
+  justify-content: center;
+}
+
+.pill{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 10px 18px;
+  border-radius: 999px;
+
+  border: 1px solid rgba(120,180,255,0.55);
+  background: rgba(10, 14, 22, 0.35);
+  color: rgb(187, 214, 239);
+
+  font-size: 15px;
+  line-height: 1;
+  user-select: none;
+  cursor: default;
+
+  box-shadow:
+    0 10px 24px rgba(0,0,0,0.35),
+    inset 0 1px 0 rgba(255,255,255,0.08);
+
+  transition:
+    transform .15s ease,
+    background .15s ease,
+    border-color .15s ease,
+    box-shadow .15s ease;
+}
+
+.pill:hover{
+  transform: translateY(-1px);
+  background: rgba(20, 30, 48, 0.45);
+  border-color: rgba(120,180,255,0.90);
+
+  box-shadow:
+    0 14px 32px rgba(0,0,0,0.45),
+    inset 0 1px 0 rgba(255,255,255,0.10);
+}
+
+/* Beyond Work section */
+#Beyond{
+  font-size: clamp(26px, 4vw, 40px);
+  color: whitesmoke;
+  text-align: left;
+  margin: 70px 0 12px;
+}
+
+#beyondp{
+  margin: 0 0 80px;
+  text-align: left;
+  color: rgb(187, 214, 239);
+  font-size: clamp(16px, 2.3vw, 22px);
+  line-height: 1.7;
+}
+
+
+/* =========================================================
+   5) CONTACT PAGE (contact.html)
+   - Centered layout and responsive sizes
+========================================================= */
+
+.contact-wrap{
+  width: min(950px, 92%);
+  margin: 120px auto 80px;
+  text-align: center;
+}
+
+.contact-title{
+  font-size: clamp(38px, 6vw, 64px);
+  color: white;
+  margin: 20px 0 10px;
+  font-weight: 800;
+}
+
+.contact-subtitle{
+  color: rgb(187, 214, 239);
+  font-size: clamp(16px, 2.2vw, 20px);
+  margin: 0 0 40px;
+  line-height: 1.6;
+  padding: 0 12px;
+}
+
+.contact-link{
+  color: rgb(120, 180, 255);
+  text-decoration: none;
+  font-weight: 700;
+}
+.contact-link:hover{
+  text-decoration: underline;
+}
+
+.contact-form{
+  width: min(900px, 100%);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.contact-input,
+.contact-textarea{
+  background: rgba(10, 14, 22, 0.35);
+  border: 1px solid rgba(255,255,255,0.18);
+  color: white;
+
+  padding: 18px 16px;
+  border-radius: 6px;
+
+  font-size: 18px;
+  outline: none;
+
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.05),
+    0 10px 24px rgba(0,0,0,0.25);
+
+  transition: border-color .15s ease, box-shadow .15s ease;
+}
+
+.contact-input::placeholder,
+.contact-textarea::placeholder{
+  color: rgba(187, 214, 239, 0.75);
+}
+
+.contact-input:focus,
+.contact-textarea:focus{
+  border-color: rgba(120, 180, 255, 0.85);
+}
+
+.contact-btn{
+  background: rgb(140, 205, 255);
+  border: none;
+  border-radius: 6px;
+  padding: 20px 16px;
+
+  font-size: 18px;
+  font-weight: 700;
+  color: #0b1220;
+
+  cursor: pointer;
+  transition: transform .15s ease, opacity .15s ease;
+}
+
+.contact-btn:hover{
+  transform: translateY(-1px);
+}
+
+.contact-btn:disabled{
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Contact form status text */
+.form-status{
+  margin: 6px 0 0;
+  font-size: 16px;
+  line-height: 1.4;
+  min-height: 22px;
+  color: rgb(187, 214, 239);
+}
+.form-status--success{ color: rgba(140, 255, 190, 0.95); }
+.form-status--error{ color: rgba(255, 140, 140, 0.95); }
+.form-status--loading{ color: rgb(187, 214, 239); }
+
+
+/* =========================================================
+   6) EXPERIENCE PAGE (exp.html)
+   - Matches your reference layout
+========================================================= */
+
+.exp-wrap{
+  width: min(950px, 92%);
+  margin: 90px auto 80px;
+  color: white;
+}
+
+.exp-title{
+  text-align: center;
+  font-size: clamp(38px, 5vw, 54px);
+  margin: 10px 0 14px;
+  font-weight: 800;
+  text-shadow: 0 10px 30px rgba(0,0,0,0.55);
+}
+
+.exp-divider{
+  height: 1px;
+  background: rgba(255,255,255,0.12);
+  width: min(650px, 95%);
+  margin: 0 auto 35px;
+}
+
+.job{
+  margin: 0 0 34px;
+}
+
+.job-title{
+  margin: 0 0 6px;
+  font-size: 20px;
+  font-weight: 800;
+  color: rgb(220, 120, 170);
+  letter-spacing: 0.2px;
+}
+
+.job-meta{
+  margin: 0 0 14px;
+  font-size: 14px;
+  color: rgba(255,255,255,0.75);
+}
+
+.job-dates{
+  color: rgba(255,255,255,0.65);
+}
+
+.job-list{
+  margin: 0;
+  padding-left: 18px;
+  color: rgb(187, 214, 239);
+  line-height: 1.65;
+  font-size: 14px;
+}
+.job-list li{ margin-bottom: 8px; }
+
+.section-title{
+  text-align: center;
+  font-size: 30px;
+  margin: 40px 0 10px;
+  font-weight: 800;
+}
+
+.section-divider{
+  height: 1px;
+  background: rgba(255,255,255,0.12);
+  width: min(650px, 95%);
+  margin: 0 auto 18px;
+}
+
+.simple-list{
+  width: min(650px, 95%);
+  margin: 0 auto;
+  padding-left: 18px;
+  color: rgb(120, 180, 255);
+  line-height: 1.7;
+  font-size: 14px;
+}
+.simple-list li{ margin-bottom: 8px; }
+
+
+/* =========================================================
+   7) MOBILE TWEAKS (<= 600px)
+   - Bigger tap targets
+   - Better spacing on phones
+========================================================= */
+
+@media (max-width: 600px){
+  .hero{ padding-top: 70px; }
+  .btn-row{ gap: 14px; }
+
+  .main-btn{
+    width: min(340px, 90vw);
+    height: 62px;
+    font-size: 18px;
+  }
+
+  .skills-card{ padding: 26px 18px 20px; }
+
+  #button4{
+    top: 14px;
+    left: 14px;
+  }
+}
